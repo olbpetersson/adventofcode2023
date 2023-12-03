@@ -1,4 +1,4 @@
-const input: string = await Bun.file(`${import.meta.dir}/input`).text();
+const input: string = await Bun.file(`${import.meta.dir}/input1`).text();
 //const input: string = await Bun.file(`${import.meta.dir}/example`).text();
 
 const numberPattern = /\d+/g;
