@@ -1,7 +1,7 @@
-//const input: string = await Bun.file(`${import.meta.dir}/input1`).text();
-const input: string = await Bun.file(`${import.meta.dir}/example2`).text();
+const input: string = await Bun.file(`${import.meta.dir}/input1`).text();
+//const input: string = await Bun.file(`${import.meta.dir}/example2`).text();
 
-const numberPattern = /(?:(one)|(two)|(three)|(four)|(five)|(six)|(seven)|(eight)|(nine)|(\d+))/g
+const numberPattern = /(?=(one)|(two)|(three)|(four)|(five)|(six)|(seven)|(eight)|(nine)|(\d+))/g
 
 const wordNumberMap = {
   "one": 1,
@@ -18,8 +18,9 @@ const wordNumberMap = {
 const result = input
   .split("\n")
   .map(line => {
-    const groups = line.match(numberPattern) ?? []
-    const numbers = groups.map(value => {
+    const regexIterator = line.matchAll(numberPattern) ?? []
+    const matchedStrings = [...regexIterator].map(value => value.find(it => it != undefined && it != ''))
+    const numbers = matchedStrings.map(value => {
       const mapHit = wordNumberMap[value]
       return mapHit ? mapHit : value
     })
@@ -27,6 +28,7 @@ const result = input
   })
   .filter(it => it !== '')
   .map(lineNumbers => Number(lineNumbers[0] + lineNumbers[lineNumbers.length - 1]))
-  .reduce((acc, current) => acc + current, 0)
 
-console.log(result)
+
+const reduced = result.reduce((acc, current) => acc + current, 0)
+console.log({ reduced })
