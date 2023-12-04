@@ -1,7 +1,6 @@
 const input: string = await Bun.file(`${import.meta.dir}/input1`).text();
 //const input: string = await Bun.file(`${import.meta.dir}/example`).text();
 
-const numberPattern = /\d+/g;
 // Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green
 class Game {
   id: Number
@@ -9,15 +8,28 @@ class Game {
   constructor(line: string) {
     const firstSplit = line.split(':')
     this.id = Number(firstSplit[0].split(' ')[1])
-    this.sets = []
+    this.sets = firstSplit[1].split(';').map(setString => {
+
+      return new GameSet(setString)
+    })
   }
 }
 
 class GameSet {
+  boxes: Array<Boxes>
+  constructor(line: string) {
+    this.boxes = line.split(",").map(boxesString => new Boxes(boxesString))
+    //3 blue, 4 red;
+
+  }
+}
+
+class Boxes {
   color: string
   amount: number
+  // 3 blue;
   constructor(line: string) {
-
+    line.trim().split(',')
   }
 }
 
