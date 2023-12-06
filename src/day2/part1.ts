@@ -1,5 +1,5 @@
-//const input: string = await Bun.file(`${import.meta.dir}/input1`).text();
-const input: string = await Bun.file(`${import.meta.dir}/example`).text();
+const input: string = await Bun.file(`${import.meta.dir}/input1`).text();
+//const input: string = await Bun.file(`${import.meta.dir}/example`).text();
 
 // Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green
 class Game {
@@ -43,15 +43,11 @@ const lines = input
 
 const result = lines
   .map(line => new Game(line))
-//.filter(game => game.isPossible())
 
-//.reduce((acc, current) => acc + current.id, 0)
+const possible = lines
+  .map(line => new Game(line))
+  .filter(game => game.isPossible())
+  .reduce((acc, current) => acc + current.id, 0)
 
-console.log({ result })
-/*.map(line => line.match(numberPattern)?.join('') ?? '0')
-  .map(linenumbers => number(linenumbers[0] + linenumbers[linenumbers.length - 1]))
-  .reduce((acc, current) => acc + current, 0)
-
-console.log(result)
-*/
+console.log({ result, possible })
 
