@@ -1,5 +1,5 @@
 const input: string = await Bun.file(`${import.meta.dir}/input1`).text();
-//const input: string = await Bun.file(`${import.meta.dir}/example`).text();
+const exampleInput: string = await Bun.file(`${import.meta.dir}/example`).text();
 
 const lines = input
   .split('\n')
