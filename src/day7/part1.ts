@@ -44,17 +44,17 @@ class Hand {
 
 const sortHands = (a: Hand, b: Hand) => {
   if (a.handRank < b.handRank) {
-    return 1
-  } else if (a.handRank > b.handRank) {
     return -1
+  } else if (a.handRank > b.handRank) {
+    return 1
   } else {
     const bNuffr = b.handRaw.split('').map(c => (zeMap.get(c) || +c))
     const aNuffr = a.handRaw.split('').map(c => (zeMap.get(c) || +c))
     for (let i = 0; i < aNuffr.length; i++) {
       if (aNuffr[i] < bNuffr[i]) {
-        return 1
-      } else if (aNuffr[i] > bNuffr[i]) {
         return -1
+      } else if (aNuffr[i] > bNuffr[i]) {
+        return 1
       }
     }
     return 0
