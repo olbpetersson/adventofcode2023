@@ -3,7 +3,6 @@ const exampleInput: string = await Bun.file(`${import.meta.dir}/example`).text()
 
 const parseLine = (line: string) => {
   let numbers = line.split(' ').map(v => +v)
-  console.log('hello', numbers)
   const finalPos = [numbers[numbers.length - 1]]
   let diffTables
   do {
@@ -18,12 +17,12 @@ const parseLine = (line: string) => {
   return finalPos.reduce((acc, current) => acc + current, 0)
 }
 
-const lines = exampleInput
+const lines = input
   .split('\n')
   .filter(it => it !== '' && it !== null)
   .map(parseLine)
 
 const result = lines.reduce((acc, current) =>
   acc + +current, 0)
-console.log({ lines })
+console.log({ result })
 
